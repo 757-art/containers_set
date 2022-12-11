@@ -1,19 +1,23 @@
-export default class Validator {
-  validateUsername(name) {
-    let regexp = /^[a-zA-Z]+[\w_-]*[a-zA-Z]$/gm;
-    let regexp2 = /[(\d\d\d)?]/gm;
-    
-    if (name.match(regexp) != null && name.match(regexp2) != null) {
+export default class Team {
+  constructor() {
+      this.members = new Set();
+  }
+  add(name) {
+    this.members.forEach((item) => {
+      if (item === name) {
+        throw new Error('Персонаж уже добавлен в команду')
+      }
+    });
+    this.members.add(name);
+  }
 
-      return name.match(regexp);
-    
-    }
+  addAll(...name) {
+    name.forEach((item)=>{
+      this.add(item);
+    });
+  }
 
+  toArray() {
+    return Array.from(this.members);
   }
 }
-
-let user = new Validator();
-user.validateUsername("Arag09_rn");
-
-console.log()
-

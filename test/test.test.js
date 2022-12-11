@@ -1,28 +1,27 @@
-import Validator from '../src/index';
+import Team from "../src/index";
+
+const team = new Team();
 
 
-test('Тестируем регулярные выражения', () => {
-  let user = new Validator()
-  expect(null).toEqual(user.validateUsername("0rag09_rn"));
+test('Add first time', ()=>{
+    const team = new Team();
+    team.add('swordsman')
+    expect(team.toArray()).toEqual(['swordsman'])
 });
 
-test('Тестируем регулярные выражения', () => {
-  let user = new Validator()
-  expect(null).toEqual(user.validateUsername("Arag09_rn3"));
+test('Add second time', ()=>{
+    const team = new Team();
+    team.add('swordsman');
+    expect(()=>team.add('swordsman')).toThrow();
 });
 
-test('Тестируем регулярные выражения', () => {
-  let user = new Validator()
-  expect(null).toEqual(user.validateUsername("_Arag09_rn"));
+test('Add all chars', ()=>{
+    const team = new Team();
+    team.addAll('swordsman','deamon','bowman')
+    expect(team.toArray()).toEqual(['swordsman','deamon','bowman'])
 });
 
-test('Тестируем регулярные выражения', () => {
-  let user = new Validator()
-  expect(null).toEqual(user.validateUsername("Arag09_rn_"));
+test('Add all chars double', ()=>{
+    const team = new Team();
+    expect(()=>team.addAll('swordsman','deamon','bowman','swordsman')).toThrow();
 });
-
-test('Тестируем регулярные выражения', () => {
-  let user = new Validator()
-  expect(["Arag09_rn"]).toEqual(user.validateUsername("Arag09_rn"));
-});
-
